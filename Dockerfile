@@ -1,46 +1,28 @@
 FROM mcr.microsoft.com/playwright:v1.48.0-jammy
 
-# Install dependencies for Playwright
-RUN apk add --no-cache \
-    chromium \
-    nss \
-    freetype \
-    freetype-dev \
-    harfbuzz \
-    ca-certificates \
-    ttf-freefont \
-    python3 \
-    make \
-    g++
-
-# Tell Playwright to use the installed chromium
-ENV PLAYWRIGHT_BROWSERS_PATH=/usr/bin/chromium-browser
-
 WORKDIR /app
 
-# Copy package files
+# Copia i file package.json e package-lock.json
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production 
-RUN npx playwright install --with-deps
+# Installa le dipendenze
+RUN npm ci --only=production
 
-
-# Copy application code
+# Copia il resto del progetto
 COPY . .
 
-# Initialize the database
+# Inizializza il database (se serve)
 RUN mkdir -p /app && touch /app/promemoria.db
 
-# Build the Next.js application
+# Costruisci l'app Next.js
 RUN npm run build
 
-# Expose the port
+# Esponi la porta
 EXPOSE 3000
 
-# Set environment variables
+# Imposta le variabili d'ambiente
 ENV NODE_ENV=production
 ENV PORT=3000
 
-# Start the application
+# Avvia l'applicazione
 CMD ["npm", "start"]
