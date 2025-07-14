@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM mcr.microsoft.com/playwright:v1.48.0-jammy
 
 # Install dependencies for Playwright
 RUN apk add --no-cache \
