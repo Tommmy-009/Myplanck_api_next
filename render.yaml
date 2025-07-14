@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: api-argo-famiglia-nextjs
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: PLAYWRIGHT_BROWSERS_PATH
+        value: /usr/bin/chromium-browser
+      - key: PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD
+        value: 1
+      # Aggiungi qui le tue credenziali se necessario
+      # - key: CODICE_SCUOLA
+      #   value: your_school_code
+      # - key: USERNAME
+      #   value: your_username
+      # - key: PASSWORD
+      #   value: your_password
