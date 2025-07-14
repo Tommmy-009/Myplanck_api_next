@@ -1,23 +1,19 @@
 services:
   - type: web
     name: api-argo-famiglia-nextjs
-    env: node
+    env: docker                     # ✅ Usa il Dockerfile per il build
     plan: free
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    dockerfilePath: ./Dockerfile   # ✅ Percorso del tuo Dockerfile
+    region: frankfurt              # Puoi cambiarlo se vuoi
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 3000
-      - key: PLAYWRIGHT_BROWSERS_PATH
-        value: /usr/bin/chromium-browser
-      - key: PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD
-        value: 1
-      # Aggiungi qui le tue credenziali se necessario
+      # Aggiungi qui le variabili per scraping (se usi Supabase o login automatico)
       # - key: CODICE_SCUOLA
-      #   value: your_school_code
+      #   value: xxx
       # - key: USERNAME
-      #   value: your_username
+      #   value: xxx
       # - key: PASSWORD
-      #   value: your_password
+      #   value: xxx
