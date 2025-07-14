@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Installa le dipendenze
-RUN npm ci --only=production
+RUN npm ci --omit=dev
 
 # ✅ Installa i browser Playwright in fase di build
 RUN npx playwright install
