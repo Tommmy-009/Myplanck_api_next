@@ -23,8 +23,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci --only=production
-RUN npx playwright install  
+RUN npm ci --only=production 
 
 # Copy application code
 COPY . .
