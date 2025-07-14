@@ -15,7 +15,6 @@ RUN apk add --no-cache \
 
 # Tell Playwright to use the installed chromium
 ENV PLAYWRIGHT_BROWSERS_PATH=/usr/bin/chromium-browser
-ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 
 WORKDIR /app
 
@@ -24,6 +23,8 @@ COPY package*.json ./
 
 # Install dependencies
 RUN npm ci --only=production 
+RUN npx playwright install --with-deps
+
 
 # Copy application code
 COPY . .
