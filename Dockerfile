@@ -8,6 +8,9 @@ COPY package*.json ./
 # Installa le dipendenze
 RUN npm ci --only=production
 
+# ✅ Installa i browser Playwright in fase di build
+RUN npx playwright install
+
 # Copia il resto del progetto
 COPY . .
 
